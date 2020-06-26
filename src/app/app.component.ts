@@ -1,4 +1,4 @@
-import { Component, VERSION } from '@angular/core';
+import { Component, VERSION, ViewChild, ElementRef } from '@angular/core';
 import { UploadService } from  '../upload.service';
 import { catchError, map } from 'rxjs/operators';  
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
@@ -10,6 +10,9 @@ import { of } from 'rxjs';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
+  @ViewChild('fileInput') fileInput: ElementRef;
+
+
   name = 'Angular ' + VERSION.major;
    
   constructor(private uploadService: UploadService) { }
@@ -18,8 +21,9 @@ export class AppComponent  {
     const formData = new FormData();  
     var content = 'This is a test'; 
     var blob = new Blob([content], { type: "text/plain"});
+    
 
-    formData.append('file', blob);
+    formData.append('file', this.fileInput.nativeElement.files[0] || blob);
     formData.append("DocumentTitle", 'sample.txt')
     this.uploadService.upload(formData);
 
