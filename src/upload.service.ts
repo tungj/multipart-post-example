@@ -12,7 +12,7 @@ export class UploadService {
 	SERVER_URL: string = "http://localhost:8080/EDMS_FN_REST/operations/v1/uploadFile";  
   constructor(private httpClient: HttpClient) { }
 
-  public upload(formData) {
+  public upload(formData: FormData) {
     function createHash(key:string, requester:string, operation:string) {
       function pad2(n) { return n < 10 ? '0' + n : n }
       var now = new Date();
