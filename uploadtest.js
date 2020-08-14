@@ -29,7 +29,7 @@ request({
     },
     formData: {
         file: {
-            value: new Buffer(base64data, 'base64'),
+            value: Buffer.from(base64data, 'base64'),
             options: {
                 filename: 'myfile.txt',
                 contentType: 'text/plain'
