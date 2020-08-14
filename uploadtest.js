@@ -23,11 +23,13 @@ var hash = createHash('b7e5f191-7893-04d0-7547-b2F31591e', 'BRS', 'filenetAddDoc
 const base64data = 'dGVzdAo=';
 request({
     uri: 'http://localhost:9080/EDMS_FN_REST/operations/v1/uploadFile',
+    method: 'POST',
     headers: {
         ... hash,
         DocumentClass: 'AccountOpening'
     },
     formData: {
+        DocumentTitle: 'uploadtest',
         file: {
             value: Buffer.from(base64data, 'base64'),
             options: {
@@ -37,5 +39,5 @@ request({
         }
     },
     json: true
-});
+}).then(resp => console.log(resp));
 
